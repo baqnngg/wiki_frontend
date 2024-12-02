@@ -1,38 +1,41 @@
 import './App.css';
 import { useState } from 'react';
 import { useNavigate, Routes, Route } from 'react-router-dom';
+import WikiPage from './WikiPage';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
-  const handlekeyPress = (e) => {
+  const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      console.log(searchQuery)
-      navigate(`/wiki/${searchQuery}`)
+      console.log(searchQuery);
+      navigate(`/wiki/${searchQuery}`);
     }
-  }
-  
+  };
+
   return (
     <>
-      <div className='container'>
-        <Routes>
-          <Route path='/wiki/:searchQuery' element={<wikiPage></wikiPage>}></Route>
-        </Routes>
+      <div className="container">
         <header>
-          <h1>Anime wiki</h1>
-          <div className='search-container'>
-            <div className='search-icon'>🔍</div>
-            <input 
-              type='text'
-              className='search-input'
-              placeholder='검색하기'
+          <h1>Anime Wiki</h1>
+          <div className="search-container">
+            <div className="search-icon">🔍</div>
+            <input
+              type="text"
+              className="search-input"
+              placeholder="검색하기"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)} 
-              onKeyDown={handlekeyPress}
-            ></input>
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleKeyPress}
+            />
           </div>
         </header>
+        <main>
+          <Routes>
+            <Route path="/wiki/:searchQuery" element={<WikiPage />} />
+          </Routes>
+        </main>
       </div>
     </>
   );
